@@ -36,14 +36,14 @@ public class StudentController {
     }
 
     @GetMapping("/getStudent")
-    public ResponseEntity getStudent(@RequestParam("student_id") Integer student_id) {
+    public ResponseEntity getStudent(@RequestParam("studentId") Integer studentId) {
          try {
-            Student student = studentService.getStudentById(student_id);
+            Student student = studentService.getStudentById(studentId);
 
             if(student != null) {
                 return ResponseEntity.status(HttpStatus.FOUND).body(student);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Student Not Found of ID - " + student_id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Student Not Found of ID - " + studentId);
             }
          } catch (Exception e) {
              return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to Fetch Student\n" + "Error : " + e.getMessage());
@@ -67,14 +67,14 @@ public class StudentController {
 
 
     @PatchMapping("/updateStudent")
-    public ResponseEntity updateStudent(@RequestParam int student_id, @RequestBody Student student) {
+    public ResponseEntity updateStudent(@RequestParam int studentId, @RequestBody Student student) {
 
         try {
-            Student student1 = studentService.updateStudent(student_id, student);
+            Student student1 = studentService.updateStudent(studentId, student);
             if(student1 != null) {
                 return ResponseEntity.status(HttpStatus.OK).body(student1);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Student Not Found of ID - " + student_id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Student Not Found of ID - " + studentId);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to update Student\n" + "Error : " + e.getMessage());
@@ -82,13 +82,13 @@ public class StudentController {
     }
 
     @DeleteMapping("/deleteStudent")
-    public ResponseEntity deleteStudent(@RequestParam int student_id) {
+    public ResponseEntity deleteStudent(@RequestParam int studentId) {
         try {
-            Student student = studentService.deleteStudent(student_id);
+            Student student = studentService.deleteStudent(studentId);
             if(student != null)
                 return ResponseEntity.status(HttpStatus.OK).body(student);
             else return ResponseEntity.status(HttpStatus.NOT_FOUND).
-                    body("message : Student is Not Found of ID : " + student_id);
+                    body("message : Student is Not Found of ID : " + studentId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body("message : Failed to delete Student" + "\nError : " + e.getMessage());

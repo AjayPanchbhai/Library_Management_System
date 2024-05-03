@@ -13,8 +13,8 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
+    private Integer bookId;
 
-    private Integer book_id;
     private String name;
     private Integer no_of_pages;
     private Double price;
@@ -27,9 +27,12 @@ public class Book {
     @ManyToOne
     private Author author;
 
+    private Boolean isIssued;
+
     public Book() {
         this.no_of_pages = 0;
         this.rating = 0.0;
+        this.isIssued = false;
     }
 }
 

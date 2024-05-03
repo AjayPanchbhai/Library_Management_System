@@ -27,13 +27,13 @@ public class BookController {
     }
 
     @GetMapping("/getBook")
-    public ResponseEntity getBook(@RequestParam("book_id") int book_id) {
+    public ResponseEntity getBook(@RequestParam("bookId") int bookId) {
         try {
-            Book book = bookService.getBookById(book_id);
+            Book book = bookService.getBookById(bookId);
             if(book != null) {
                 return ResponseEntity.status(HttpStatus.FOUND).body(book);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Book Not Found of ID - " + book_id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Book Not Found of ID - " + bookId);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to Fetch Book\n" + "Error : " + e.getMessage());
@@ -55,13 +55,13 @@ public class BookController {
     }
 
     @PatchMapping("/updateBook")
-    public ResponseEntity updateBook(@RequestParam("book_id") int book_id, @RequestBody Book book) {
+    public ResponseEntity updateBook(@RequestParam("bookId") int bookId, @RequestBody Book book) {
         try {
-            Book book1 = bookService.updateBook(book_id, book);
+            Book book1 = bookService.updateBook(bookId, book);
             if(book1 != null) {
                 return ResponseEntity.status(HttpStatus.OK).body(book1);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Book is Not Found of ID - " + book_id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Book is Not Found of ID - " + bookId);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to update book\n" + "Error : " + e.getMessage());
@@ -69,13 +69,13 @@ public class BookController {
     }
 
     @DeleteMapping("/deleteBook")
-    public ResponseEntity deleteBook(@RequestParam("book_id") int book_id) {
+    public ResponseEntity deleteBook(@RequestParam("bookId") int bookId) {
         try {
-            Book book = bookService.deleteBook(book_id);
+            Book book = bookService.deleteBook(bookId);
             if(book != null)
                 return ResponseEntity.status(HttpStatus.OK).body(book);
             else return ResponseEntity.status(HttpStatus.NOT_FOUND).
-                    body("message : Book is Not Found of ID : " + book_id);
+                    body("message : Book is Not Found of ID : " + bookId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body("message : Failed to delete Book" + "\nError : " + e.getMessage());
@@ -83,9 +83,9 @@ public class BookController {
     }
 
     @PutMapping("/associateBookAndAuthor")
-    public ResponseEntity associateBookAndCard(@RequestParam("book_id") int book_id, @RequestParam("author_id") int author_id) {
+    public ResponseEntity associateBookAndCard(@RequestParam("bookId") int bookId, @RequestParam("authorId") int authorId) {
         try {
-            String res = bookService.associateBookAndCard(book_id, author_id);
+            String res = bookService.associateBookAndCard(bookId, authorId);
             return ResponseEntity.status(HttpStatus.OK).body(res);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

@@ -27,14 +27,14 @@ public class CardController {
     }
 
     @GetMapping("/getCard")
-    public ResponseEntity getCard(@RequestParam("card_id") int card_id) {
+    public ResponseEntity getCard(@RequestParam("cardId") int cardId) {
         try {
-            LibraryCard card = cardService.getCard(card_id);
+            LibraryCard card = cardService.getCard(cardId);
 
             if(card != null) {
                 return ResponseEntity.status(HttpStatus.FOUND).body(card);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Card Not Found of ID - " + card_id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Card Not Found of ID - " + cardId);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to Fetch Card\n" + "Error : " + e.getMessage());
@@ -56,9 +56,9 @@ public class CardController {
     }
 
     @PutMapping("/associateCardAndStudent")
-    public ResponseEntity associateCardAndStudent(@RequestParam("card_id") int card_id, @RequestParam("student_id") int student_id) {
+    public ResponseEntity associateCardAndStudent(@RequestParam("cardId") int cardId, @RequestParam("studentId") int studentId) {
         try {
-            String res = cardService.associateCardAndStudent(card_id, student_id);
+            String res = cardService.associateCardAndStudent(cardId, studentId);
             return ResponseEntity.status(HttpStatus.OK).body(res);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -66,13 +66,13 @@ public class CardController {
     }
 
     @PatchMapping("/updateCard")
-    public ResponseEntity updateCard(@RequestParam("card_id") int card_id, @RequestBody LibraryCard card) {
+    public ResponseEntity updateCard(@RequestParam("cardId") int cardId, @RequestBody LibraryCard card) {
         try {
-            LibraryCard card1 = cardService.updateCard(card_id, card);
+            LibraryCard card1 = cardService.updateCard(cardId, card);
             if(card1 != null) {
                 return ResponseEntity.status(HttpStatus.OK).body(card1);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Card is Not Found of ID - " + card_id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Card is Not Found of ID - " + cardId);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to update Card\n" + "Error : " + e.getMessage());
@@ -80,13 +80,13 @@ public class CardController {
     }
 
     @DeleteMapping("/deleteCard")
-    public ResponseEntity deleteCard(@RequestParam("card_id") int card_id) {
+    public ResponseEntity deleteCard(@RequestParam("cardId") int cardId) {
         try {
-            LibraryCard card = cardService.deleteCard(card_id);
+            LibraryCard card = cardService.deleteCard(cardId);
             if(card != null)
                 return ResponseEntity.status(HttpStatus.OK).body(card);
             else return ResponseEntity.status(HttpStatus.NOT_FOUND).
-                    body("message : Card is Not Found of ID : " + card_id);
+                    body("message : Card is Not Found of ID : " + cardId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body("message : Failed to delete Card" + "\nError : " + e.getMessage());

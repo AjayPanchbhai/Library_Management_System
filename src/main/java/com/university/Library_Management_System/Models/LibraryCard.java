@@ -2,20 +2,20 @@ package com.university.Library_Management_System.Models;
 
 import com.university.Library_Management_System.Enum.CardStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 
 public class LibraryCard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int card_id;
+    private int cardId;
 
     private Integer no_of_books_issue;
 

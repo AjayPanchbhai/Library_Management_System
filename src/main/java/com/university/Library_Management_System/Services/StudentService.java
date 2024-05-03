@@ -23,8 +23,8 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Student getStudentById(int student_id) {
-       return studentRepository.findById(student_id).orElse(null);
+    public Student getStudentById(int studentId) {
+       return studentRepository.findById(studentId).orElse(null);
     }
 
     // get student methods
@@ -33,8 +33,8 @@ public class StudentService {
     }
 
     // update student
-    public Student updateStudent(int student_id, Student student) {
-        Student student1 = this.getStudentById(student_id);
+    public Student updateStudent(int studentId, Student student) {
+        Student student1 = this.getStudentById(studentId);
 
         if(student1 != null) {
             if(student.getName() != null) student1.setName(student.getName());
@@ -46,12 +46,12 @@ public class StudentService {
             studentRepository.save(student1);
         }
 
-        return this.getStudentById(student_id);
+        return this.getStudentById(studentId);
     }
 
     // delete student
-    public Student deleteStudent(int student_id) {
-        Student student1 = getStudentById(student_id);
+    public Student deleteStudent(int studentId) {
+        Student student1 = getStudentById(studentId);
         if(student1 != null)
             studentRepository.delete(student1);
         return student1;

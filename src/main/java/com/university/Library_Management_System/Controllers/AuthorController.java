@@ -29,13 +29,13 @@ public class AuthorController {
     }
 
     @GetMapping("/getAuthor")
-    public ResponseEntity getAuthor(@RequestParam int author_id) {
+    public ResponseEntity getAuthor(@RequestParam int authorId) {
         try {
-            Author author = authorService.getAuthor(author_id);
+            Author author = authorService.getAuthor(authorId);
             if(author != null) {
                 return ResponseEntity.status(HttpStatus.FOUND).body(author);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Author not found of ID - " + author_id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Author not found of ID - " + authorId);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to Fetch Author\n" + "Error : " + e.getMessage());
@@ -57,13 +57,13 @@ public class AuthorController {
     }
 
     @PatchMapping("/updateAuthor")
-    public ResponseEntity updateAuthor(@RequestParam("author_id") int author_id, @RequestBody Author author) {
+    public ResponseEntity updateAuthor(@RequestParam("authorId") int authorId, @RequestBody Author author) {
         try {
-            Author author1 = authorService.updateAuthor(author_id, author);
+            Author author1 = authorService.updateAuthor(authorId, author);
             if(author1 != null) {
                 return ResponseEntity.status(HttpStatus.OK).body(author1);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Author is Not Found of ID - " + author_id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Author is Not Found of ID - " + authorId);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to update Author\n" + "Error : " + e.getMessage());
@@ -71,13 +71,13 @@ public class AuthorController {
     }
 
     @DeleteMapping("/deleteAuthor")
-    public ResponseEntity deleteAuthor(@RequestParam("author_id") int author_id) {
+    public ResponseEntity deleteAuthor(@RequestParam("authorId") int authorId) {
         try {
-            Author author = authorService.deleteAuthor(author_id);
+            Author author = authorService.deleteAuthor(authorId);
             if(author != null)
                 return ResponseEntity.status(HttpStatus.OK).body(author);
             else return ResponseEntity.status(HttpStatus.NOT_FOUND).
-                    body("message : Author is Not Found of ID : " + author_id);
+                    body("message : Author is Not Found of ID : " + authorId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body("message : Failed to delete Author" + "\nError : " + e.getMessage());

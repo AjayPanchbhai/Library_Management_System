@@ -16,16 +16,16 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
-    public Author getAuthor(int author_id) {
-        return authorRepository.findById(author_id).orElse(null);
+    public Author getAuthor(int authorId) {
+        return authorRepository.findById(authorId).orElse(null);
     }
 
     public List<Author> getAllAuthors() {
         return authorRepository.findAll();
     }
 
-    public Author updateAuthor(int author_id, Author author) {
-        Author author1 = this.getAuthor(author_id);
+    public Author updateAuthor(int authorId, Author author) {
+        Author author1 = this.getAuthor(authorId);
 
         if(author1 != null) {
             if(author.getName() != null) author1.setName(author.getName());
@@ -36,14 +36,14 @@ public class AuthorService {
             authorRepository.save(author1);
         }
 
-        return this.getAuthor(author_id);
+        return this.getAuthor(authorId);
     }
 
-    public Author deleteAuthor(int author_id) {
-        Author author = this.getAuthor(author_id);
+    public Author deleteAuthor(int authorId) {
+        Author author = this.getAuthor(authorId);
 
         if(author != null)
-            authorRepository.deleteById(author_id);
+            authorRepository.deleteById(authorId);
 
         return author;
     }
