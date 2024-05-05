@@ -25,13 +25,37 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/getByCard")
-    public ResponseEntity getByCard(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
+    @GetMapping("/getByBookAndCard")
+    public ResponseEntity getByBookAndCard(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
         try {
-            Transaction transaction = transactionService.findByCard(bookId, cardId);
+            Transaction transaction = transactionService.getByBookAndCard(bookId, cardId);
             return ResponseEntity.status(HttpStatus.OK).body(transaction);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/getByBookAndCardAndIssued")
+    public ResponseEntity getByBookAndCardAndIssued(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
+        try {
+            Transaction transaction = transactionService.findByCardAndBookAndIssued(bookId, cardId);
+            return ResponseEntity.status(HttpStatus.OK).body(transaction);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/returnBook")
+    public ResponseEntity returnBook(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
+        try {
+            Transaction transaction = transactionService.returnBook(bookId, cardId);
+            if(transaction != null) {
+                return ResponseEntity.status(HttpStatus.OK).body(transaction);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("message : Transaction Not Found!");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to do Transaction\n" + "Error : " + e.getMessage());
         }
     }
 }

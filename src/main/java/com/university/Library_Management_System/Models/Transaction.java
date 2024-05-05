@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -27,7 +25,7 @@ public class Transaction {
     @CreationTimestamp
     private Date issueDate;
 
-    private LocalDate returnDate;
+    private Date returnDate;
 
     private Double fineAmount;
 
@@ -41,6 +39,5 @@ public class Transaction {
 
     public Transaction() {
         this.fineAmount = 0.0;
-        this.returnDate = LocalDate.now().plusDays(15);
     }
 }

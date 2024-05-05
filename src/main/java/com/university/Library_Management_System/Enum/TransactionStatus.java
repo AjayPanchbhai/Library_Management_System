@@ -1,7 +1,6 @@
 package com.university.Library_Management_System.Enum;
 
 public enum TransactionStatus {
-    PENDING,
-    SUCCESS,
-    FAILURE
+    ISSUED,
+    RETURNED
 }

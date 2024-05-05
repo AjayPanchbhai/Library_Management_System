@@ -27,12 +27,15 @@ public class Book {
     @ManyToOne
     private Author author;
 
-    private Boolean isIssued;
+    private Integer bookTotalCount;
+
+    private Integer issuedBookCount;
 
     public Book() {
         this.no_of_pages = 0;
         this.rating = 0.0;
-        this.isIssued = false;
+        this.bookTotalCount = 0;
+        this.issuedBookCount = 0;
     }
 }
 

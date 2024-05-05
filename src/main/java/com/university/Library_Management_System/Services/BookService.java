@@ -41,10 +41,10 @@ public class BookService {
         if(book1 != null) {
             if(book.getName() != null) book1.setName(book.getName());
             if(book.getPrice() != null) book1.setPrice(book.getPrice());
-            if(book.getRating() != null) book1.setRating(book.getRating());
+            if(book.getRating() != null) book1.setRating(Math.min(Math.max(book.getRating(), 0.0), 5.0));
             if(book.getGenre() != null) book1.setGenre(book.getGenre());
             if(book.getAuthor() != null) book1.setAuthor(book.getAuthor());
-            if(book.getIsIssued() != null) book1.setIsIssued(book.getIsIssued());
+            if(book.getBookTotalCount() != null) book1.setBookTotalCount(Math.max(0,book1.getBookTotalCount() + book.getBookTotalCount()));
 
             bookRepository.save(book1);
         }
