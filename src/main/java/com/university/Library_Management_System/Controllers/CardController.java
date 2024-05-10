@@ -1,6 +1,5 @@
 package com.university.Library_Management_System.Controllers;
 
-import com.university.Library_Management_System.Models.Book;
 import com.university.Library_Management_System.Models.LibraryCard;
 import com.university.Library_Management_System.Services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class CardController {
     private CardService cardService;
 
     @PostMapping("/add")
-    public ResponseEntity addCard() {
+    public ResponseEntity<?> addCard() {
         LibraryCard card = cardService.addCard();
         if(card != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(card);
@@ -27,7 +26,7 @@ public class CardController {
     }
 
     @GetMapping("/getCard")
-    public ResponseEntity getCard(@RequestParam("cardId") int cardId) {
+    public ResponseEntity<?> getCard(@RequestParam("cardId") int cardId) {
         try {
             LibraryCard card = cardService.getCard(cardId);
 
@@ -42,7 +41,7 @@ public class CardController {
     }
 
     @GetMapping("/getAllCards")
-    public ResponseEntity getAllCards() {
+    public ResponseEntity<?> getAllCards() {
         try {
             List<LibraryCard> cards = cardService.getAllCards();
             if(!cards.isEmpty()) {
@@ -56,7 +55,7 @@ public class CardController {
     }
 
     @PutMapping("/associateCardAndStudent")
-    public ResponseEntity associateCardAndStudent(@RequestParam("cardId") int cardId, @RequestParam("studentId") int studentId) {
+    public ResponseEntity<?> associateCardAndStudent(@RequestParam("cardId") int cardId, @RequestParam("studentId") int studentId) {
         try {
             String res = cardService.associateCardAndStudent(cardId, studentId);
             return ResponseEntity.status(HttpStatus.OK).body(res);
@@ -66,7 +65,7 @@ public class CardController {
     }
 
     @PatchMapping("/updateCard")
-    public ResponseEntity updateCard(@RequestParam("cardId") int cardId, @RequestBody LibraryCard card) {
+    public ResponseEntity<?> updateCard(@RequestParam("cardId") int cardId, @RequestBody LibraryCard card) {
         try {
             LibraryCard card1 = cardService.updateCard(cardId, card);
             if(card1 != null) {
@@ -80,7 +79,7 @@ public class CardController {
     }
 
     @DeleteMapping("/deleteCard")
-    public ResponseEntity deleteCard(@RequestParam("cardId") int cardId) {
+    public ResponseEntity<?> deleteCard(@RequestParam("cardId") int cardId) {
         try {
             LibraryCard card = cardService.deleteCard(cardId);
             if(card != null)

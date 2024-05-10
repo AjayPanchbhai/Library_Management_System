@@ -1,12 +1,12 @@
 package com.university.Library_Management_System.Services;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.university.Library_Management_System.Models.Student;
 import com.university.Library_Management_System.Repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -20,7 +20,10 @@ public class StudentService {
 
     //create student and save in db
     public Student addStudent(Student student) {
-        return studentRepository.save(student);
+        Student student1 = studentRepository.findByEmail(student.getEmail());
+        if(student1 == null)
+            return studentRepository.save(student);
+        return null;
     }
 
     public Student getStudentById(int studentId) {

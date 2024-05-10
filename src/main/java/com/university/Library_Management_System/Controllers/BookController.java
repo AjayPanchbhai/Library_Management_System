@@ -1,6 +1,5 @@
 package com.university.Library_Management_System.Controllers;
 
-import com.university.Library_Management_System.Models.Author;
 import com.university.Library_Management_System.Models.Book;
 import com.university.Library_Management_System.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping("/add")
-    public ResponseEntity addBook(@RequestBody Book book) {
+    public ResponseEntity<?> addBook(@RequestBody Book book) {
         try {
             Book book1 = bookService.addBook(book);
             return ResponseEntity.status(HttpStatus.CREATED).body(book1);
@@ -27,7 +26,7 @@ public class BookController {
     }
 
     @GetMapping("/getBook")
-    public ResponseEntity getBook(@RequestParam("bookId") int bookId) {
+    public ResponseEntity<?> getBook(@RequestParam("bookId") int bookId) {
         try {
             Book book = bookService.getBookById(bookId);
             if(book != null) {
@@ -41,7 +40,7 @@ public class BookController {
     }
 
     @GetMapping("/getAllBooks")
-    public ResponseEntity getAllBooks() {
+    public ResponseEntity<?> getAllBooks() {
         try {
             List<Book> books = bookService.getAllBooks();
             if(!books.isEmpty()) {
@@ -55,7 +54,7 @@ public class BookController {
     }
 
     @PatchMapping("/updateBook")
-    public ResponseEntity updateBook(@RequestParam("bookId") int bookId, @RequestBody Book book) {
+    public ResponseEntity<?> updateBook(@RequestParam("bookId") int bookId, @RequestBody Book book) {
         try {
             Book book1 = bookService.updateBook(bookId, book);
             if(book1 != null) {
@@ -69,7 +68,7 @@ public class BookController {
     }
 
     @DeleteMapping("/deleteBook")
-    public ResponseEntity deleteBook(@RequestParam("bookId") int bookId) {
+    public ResponseEntity<?> deleteBook(@RequestParam("bookId") int bookId) {
         try {
             Book book = bookService.deleteBook(bookId);
             if(book != null)
@@ -83,7 +82,7 @@ public class BookController {
     }
 
     @PutMapping("/associateBookAndAuthor")
-    public ResponseEntity associateBookAndCard(@RequestParam("bookId") int bookId, @RequestParam("authorId") int authorId) {
+    public ResponseEntity<?> associateBookAndCard(@RequestParam("bookId") int bookId, @RequestParam("authorId") int authorId) {
         try {
             String res = bookService.associateBookAndCard(bookId, authorId);
             return ResponseEntity.status(HttpStatus.OK).body(res);

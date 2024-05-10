@@ -1,11 +1,9 @@
 package com.university.Library_Management_System.Controllers;
 
 import com.university.Library_Management_System.Models.Author;
-import com.university.Library_Management_System.Models.Book;
 import com.university.Library_Management_System.Services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +16,7 @@ public class AuthorController {
     AuthorService authorService;
 
     @PostMapping("/add")
-    public ResponseEntity addAuthor(@RequestBody Author author) {
+    public ResponseEntity<?> addAuthor(@RequestBody Author author) {
         try {
             Author author1 = authorService.addAuthor(author);
             return ResponseEntity.status(HttpStatus.CREATED).body(author1);
@@ -29,7 +27,7 @@ public class AuthorController {
     }
 
     @GetMapping("/getAuthor")
-    public ResponseEntity getAuthor(@RequestParam int authorId) {
+    public ResponseEntity<?> getAuthor(@RequestParam int authorId) {
         try {
             Author author = authorService.getAuthor(authorId);
             if(author != null) {
@@ -43,7 +41,7 @@ public class AuthorController {
     }
 
     @GetMapping("/getAllAuthors")
-    public ResponseEntity getAllAuthors() {
+    public ResponseEntity<?> getAllAuthors() {
         try {
             List<Author> authors = authorService.getAllAuthors();
             if(!authors.isEmpty()) {
@@ -57,7 +55,7 @@ public class AuthorController {
     }
 
     @PatchMapping("/updateAuthor")
-    public ResponseEntity updateAuthor(@RequestParam("authorId") int authorId, @RequestBody Author author) {
+    public ResponseEntity<?> updateAuthor(@RequestParam("authorId") int authorId, @RequestBody Author author) {
         try {
             Author author1 = authorService.updateAuthor(authorId, author);
             if(author1 != null) {
@@ -71,7 +69,7 @@ public class AuthorController {
     }
 
     @DeleteMapping("/deleteAuthor")
-    public ResponseEntity deleteAuthor(@RequestParam("authorId") int authorId) {
+    public ResponseEntity<?> deleteAuthor(@RequestParam("authorId") int authorId) {
         try {
             Author author = authorService.deleteAuthor(authorId);
             if(author != null)

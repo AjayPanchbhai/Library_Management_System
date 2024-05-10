@@ -1,6 +1,5 @@
 package com.university.Library_Management_System.Controllers;
 
-import com.university.Library_Management_System.Models.Author;
 import com.university.Library_Management_System.Models.Student;
 import com.university.Library_Management_System.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("student")
 @RestController
@@ -26,17 +24,20 @@ public class StudentController {
 
 
     @PostMapping("/add")
-    public ResponseEntity addStudent(@RequestBody Student student) {
+    public ResponseEntity<?> addStudent(@RequestBody Student student) {
         try {
             Student student1 = studentService.addStudent(student);
-            return ResponseEntity.status(HttpStatus.CREATED).body(student1);
+            if(student1 != null)
+                return ResponseEntity.status(HttpStatus.CREATED).body(student1);
+            else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Student With Email Id - " + student.getEmail() + " Already Present Please Login or Enter Different Email");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("message : Failed to Create Student\n" + "Error : " + e.getMessage());
         }
     }
 
     @GetMapping("/getStudent")
-    public ResponseEntity getStudent(@RequestParam("studentId") Integer studentId) {
+    public ResponseEntity<?> getStudent(@RequestParam("studentId") Integer studentId) {
          try {
             Student student = studentService.getStudentById(studentId);
 
@@ -51,7 +52,7 @@ public class StudentController {
     }
 
     @GetMapping("/getAllStudents")
-    public ResponseEntity getAllStudent() {
+    public ResponseEntity<?> getAllStudent() {
         try {
             List<Student> students = studentService.getAllStudents();
 
@@ -67,7 +68,7 @@ public class StudentController {
 
 
     @PatchMapping("/updateStudent")
-    public ResponseEntity updateStudent(@RequestParam int studentId, @RequestBody Student student) {
+    public ResponseEntity<?> updateStudent(@RequestParam int studentId, @RequestBody Student student) {
 
         try {
             Student student1 = studentService.updateStudent(studentId, student);
@@ -82,7 +83,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/deleteStudent")
-    public ResponseEntity deleteStudent(@RequestParam int studentId) {
+    public ResponseEntity<?> deleteStudent(@RequestParam int studentId) {
         try {
             Student student = studentService.deleteStudent(studentId);
             if(student != null)

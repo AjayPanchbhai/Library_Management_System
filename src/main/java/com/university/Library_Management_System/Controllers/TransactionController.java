@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.Query;
-
 @RestController
 @RequestMapping("transaction")
 public class TransactionController {
@@ -16,7 +14,7 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping("/issueBook")
-    public ResponseEntity issueBook(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
+    public ResponseEntity<?> issueBook(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
         try {
             Transaction transaction = transactionService.issueBook(bookId, cardId);
             return ResponseEntity.status(HttpStatus.OK).body(transaction);
@@ -26,7 +24,7 @@ public class TransactionController {
     }
 
     @GetMapping("/getByBookAndCard")
-    public ResponseEntity getByBookAndCard(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
+    public ResponseEntity<?> getByBookAndCard(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
         try {
             Transaction transaction = transactionService.getByBookAndCard(bookId, cardId);
             return ResponseEntity.status(HttpStatus.OK).body(transaction);
@@ -36,7 +34,7 @@ public class TransactionController {
     }
 
     @GetMapping("/getByBookAndCardAndIssued")
-    public ResponseEntity getByBookAndCardAndIssued(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
+    public ResponseEntity<?> getByBookAndCardAndIssued(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
         try {
             Transaction transaction = transactionService.findByCardAndBookAndIssued(bookId, cardId);
             return ResponseEntity.status(HttpStatus.OK).body(transaction);
@@ -46,7 +44,7 @@ public class TransactionController {
     }
 
     @PostMapping("/returnBook")
-    public ResponseEntity returnBook(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
+    public ResponseEntity<?> returnBook(@RequestParam("bookId") int bookId, @RequestParam("cardId") int cardId) {
         try {
             Transaction transaction = transactionService.returnBook(bookId, cardId);
             if(transaction != null) {

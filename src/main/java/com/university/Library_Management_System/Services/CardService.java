@@ -1,7 +1,6 @@
 package com.university.Library_Management_System.Services;
 
 import com.university.Library_Management_System.Enum.CardStatus;
-import com.university.Library_Management_System.Models.Book;
 import com.university.Library_Management_System.Models.LibraryCard;
 import com.university.Library_Management_System.Models.Student;
 import com.university.Library_Management_System.Repositories.CardRepository;
