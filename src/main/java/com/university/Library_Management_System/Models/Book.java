@@ -1,5 +1,6 @@
 package com.university.Library_Management_System.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.university.Library_Management_System.Enum.Genre;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class Book {
 
     @JoinColumn
     @ManyToOne
+    @JsonManagedReference
     private Author author;
 
     private Integer bookTotalCount;

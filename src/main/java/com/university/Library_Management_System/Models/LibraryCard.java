@@ -1,8 +1,11 @@
 package com.university.Library_Management_System.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.university.Library_Management_System.Enum.CardStatus;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table
@@ -24,7 +27,13 @@ public class LibraryCard {
 
     @JoinColumn
     @OneToOne
+    @JsonManagedReference
     private Student student;
+
+    @JoinColumn
+    @OneToMany
+    @JsonManagedReference
+    private List<Book> books;
 
     public LibraryCard() {
         this.card_status = CardStatus.NEW;

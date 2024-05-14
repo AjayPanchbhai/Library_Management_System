@@ -60,7 +60,7 @@ public class BookService {
     }
 
     // associate Book to Card
-    public String associateBookAndCard(int bookId, int authorId) throws Exception {
+    public String associateBookAndAuthor(int bookId, int authorId) throws Exception {
         Book book = this.getBookById(bookId);
         Author author = authorService.getAuthor(authorId);
 
@@ -73,6 +73,7 @@ public class BookService {
         }
 
         author.setNo_of_books(author.getNo_of_books() + 1);
+        author.getBooks().add(book);
         book.setAuthor(author);
 
         authorRepository.save(author);

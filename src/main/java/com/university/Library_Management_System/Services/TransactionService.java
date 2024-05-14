@@ -64,6 +64,7 @@ public class TransactionService {
 
         book.setIssuedBookCount(book.getIssuedBookCount() + 1);
         card.setNo_of_books_issue(card.getNo_of_books_issue() + 1);
+        card.getBooks().add(book);
 
         bookRepository.save(book);
         cardRepository.save(card);
@@ -107,6 +108,7 @@ public class TransactionService {
 
         book.setIssuedBookCount(Math.max(0, book.getIssuedBookCount() - 1));
         card.setNo_of_books_issue(Math.max(card.getNo_of_books_issue() - 1, 0));
+        card.getBooks().remove(book);
 
         bookRepository.save(book);
         cardRepository.save(card);

@@ -1,5 +1,6 @@
 package com.university.Library_Management_System.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -32,6 +33,11 @@ public class Student {
 
     private String branch;
     private String address;
+
+    @JoinColumn
+    @OneToOne
+    @JsonBackReference
+    private LibraryCard card;
 
     public Student() {
     }

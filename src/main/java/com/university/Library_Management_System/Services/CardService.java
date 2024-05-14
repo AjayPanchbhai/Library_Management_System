@@ -44,6 +44,7 @@ public class CardService {
 
         card.setStudent(student);
         card.setCard_status(CardStatus.ACTIVE);
+        student.setCard(card);
 
         cardRepository.save(card);
         return "Card " + cardId + " associate with student " + studentId + " successfully";

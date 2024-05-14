@@ -82,9 +82,9 @@ public class BookController {
     }
 
     @PutMapping("/associateBookAndAuthor")
-    public ResponseEntity<?> associateBookAndCard(@RequestParam("bookId") int bookId, @RequestParam("authorId") int authorId) {
+    public ResponseEntity<?> associateBookAndAuthor(@RequestParam("bookId") int bookId, @RequestParam("authorId") int authorId) {
         try {
-            String res = bookService.associateBookAndCard(bookId, authorId);
+            String res = bookService.associateBookAndAuthor(bookId, authorId);
             return ResponseEntity.status(HttpStatus.OK).body(res);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
